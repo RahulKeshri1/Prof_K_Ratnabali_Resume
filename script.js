@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebarToggle = document.querySelector(".sidebar-toggle");
   const nav = document.querySelector(".nav");
   const navLinks = document.querySelectorAll(".nav a");
+  // Select all elements with class 'stat-number'
+  const counters = document.querySelectorAll(".stat-number");
 
   if (!sidebarToggle || !nav) return;
 
@@ -49,6 +51,71 @@ document.addEventListener("DOMContentLoaded", () => {
       if (nav.classList.contains("active")) {
         nav.classList.remove("show");
       }
+    });
+  });
+
+  const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+
+          const targetAttr = counter.getAttribute("data-target");
+          const suffix = counter.getAttribute("data-suffix") || "+";
+
+          const target = parseInt(targetAttr, 10);
+          if (isNaN(target) || target < 0) {
+            console.error(
+              `Invalid or negative data-target for element:`,
+              counter
+            );
+            counter.textContent = "N/A";
+            return;
+          }
+
+          let startTime = null;
+          const duration = 1000; // Total duration in ms
+
+          const animate = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+
+            const progress = Math.min(elapsed / duration, 1);
+            const currentValue = Math.floor(progress * target);
+
+            counter.textContent = currentValue;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              counter.textContent = target + suffix;
+            }
+          };
+
+          requestAnimationFrame(animate);
+          observer.unobserve(counter);
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    }
+  );
+
+  counters.forEach((counter) => {
+    observer.observe(counter);
+
+    // Optional cleanup if element is removed
+    const mutationObserver = new MutationObserver(() => {
+      if (!document.contains(counter)) {
+        observer.unobserve(counter);
+      }
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
   });
 });
