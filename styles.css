@@ -398,7 +398,7 @@ html, body {
 
 .stat-number {
   font-size: 2.5rem;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 10px;
   color: #f6e05e;
 }
@@ -459,6 +459,42 @@ html, body {
   transform: translateY(-2px);
 }
 
+.committee-item{
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: #3c4b64;
+  padding: 25px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #f6e05e;
+}
+.committee-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.committee-name{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+.committee-description{
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+.left{
+  flex:3;
+  padding-right: 5px;
+  /* border: 2px solid white; */
+}
+.right{
+  flex: 0 0 auto;
+  padding-left: 5px;
+  text-align: right;
+  /* border: 2px solid white; */
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 40px 20px;
@@ -516,7 +552,7 @@ html, body {
   margin-top: 50px;
 }
 
-@media print {
+/* @media print {
   .nav,
   .hero,
   .footer,
@@ -579,4 +615,4 @@ html, body {
   .conference-details {
     color: #333 !important;
   }
-}
+} */

@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const counter = entry.target;
 
           const targetAttr = counter.getAttribute("data-target");
-          const suffix = counter.getAttribute("data-suffix") || "+";
+          const suffix = counter.getAttribute("data-suffix");
 
           const target = parseInt(targetAttr, 10);
           if (isNaN(target) || target < 0) {
