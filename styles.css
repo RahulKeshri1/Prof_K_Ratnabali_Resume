@@ -81,6 +81,9 @@ html, body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .hero::before {
@@ -98,6 +101,27 @@ html, body {
   position: relative;
   z-index: 1;
 }
+
+.hero .img {
+    flex: 0 0 auto;
+}
+.hero .img img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f6e05e;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    margin-left:30px;
+}
+.hero .img img:hover {
+    transform: scale(1.05);    
+}
+.hero .hero-content {
+    flex: 1;
+}
+
 
 .hero h1 {
   font-size: 3.5rem;
@@ -503,7 +527,18 @@ html, body {
   .hero h1 {
     font-size: 2.5rem;
   }
-
+  .hero {
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+    }
+    .hero .img img {
+        width: 200px;
+        height:200px;
+    }
+    .hero .hero-content {
+        text-align: center;
+    }
   .container{
     margin:10px;
   }
